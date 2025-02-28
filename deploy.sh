@@ -1,3 +1,5 @@
+rm -rf node_modules/.cache/gh-pages/
+
 git remote rm origin
 git remote add origin https://github.com/TanglyEagle7718/WatchParty.git
 
