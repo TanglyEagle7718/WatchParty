@@ -8,21 +8,19 @@ const TwitchEmbed = ({ streamer, chat, width, height }) => {
     document.body.appendChild(script);
 
     script.onload = () => {
-      const embedElement = document.getElementById('twitch-embed');
+      const embedElement = document.getElementById(`twitch-embed-${streamer}`);
       
-      // Clean up any existing embed before creating a new one
       embedElement.innerHTML = ''; // Clear the old embed
 
-      // Create the new embed based on current props (width, height, etc.)
       if (chat) {
-        new window.Twitch.Embed('twitch-embed', {
+        new window.Twitch.Embed(`twitch-embed-${streamer}`, {
           width: width,
           height: height,
           channel: streamer,
           parent: ['tanglyeagle7718.github.io'],
         });
       } else {
-        new window.Twitch.Embed('twitch-embed', {
+        new window.Twitch.Embed(`twitch-embed-${streamer}`, {
           width: width,
           height: height,
           channel: streamer,
@@ -33,14 +31,13 @@ const TwitchEmbed = ({ streamer, chat, width, height }) => {
     };
 
     return () => {
-      // Cleanup script on unmount
       document.body.removeChild(script);
     };
-  }, [streamer, chat, width, height]); // Re-run effect when these props change
+  }, [streamer, chat, width, height]);
 
   return (
     <div>
-      <div id="twitch-embed"></div>
+      <div id={`twitch-embed-${streamer}`}></div>
     </div>
   );
 };
